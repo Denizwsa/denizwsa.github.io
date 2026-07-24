@@ -1,0 +1,100 @@
+<!--
+  SECURITY NOTE:
+  This admin panel is fully client-side and publicly visible.
+  Real security comes from:
+  1. Backend Authorization header validation (ADMIN_SECRET)
+  2. Rate limiting on backend (5 req/min per IP)
+  3. Password stored in sessionStorage (not localStorage)
+  Anyone reading this code cannot bypass auth without the secret.
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wsamiaw Admin</title>
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="login-screen" id="loginScreen">
+    <div class="login-box">
+        <div class="login-logo">
+            <span class="logo-icon">&#9889;</span>
+            <span class="logo-text">Wsamiaw</span>
+        </div>
+        <p class="login-sub">Admin Panel</p>
+        <form id="loginForm">
+            <input type="password" id="passwordInput" placeholder="Admin secret" autocomplete="off" autofocus>
+            <button type="submit" class="btn btn-primary" id="loginBtn">Giriş</button>
+        </form>
+        <p class="login-error" id="loginError"></p>
+    </div>
+</div>
+
+<div class="panel" id="panel" style="display:none;">
+    <header class="panel-header">
+        <div class="panel-header-left">
+            <span class="logo-icon">&#9889;</span>
+            <span class="logo-text">Wsamiaw</span>
+            <span class="panel-badge">Admin</span>
+        </div>
+        <button class="btn btn-ghost" id="logoutBtn">Logout</button>
+    </header>
+
+    <main class="panel-main">
+        <section class="card">
+            <h2>Generate Key</h2>
+            <form id="generateForm" class="gen-form">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Duration</label>
+                        <input type="text" id="genDuration" placeholder="lifetime (e.g. 30d, 1w)">
+                    </div>
+                    <div class="form-group">
+                        <label>Max Resets</label>
+                        <input type="number" id="genResets" placeholder="3" value="3" min="0" max="99">
+                    </div>
+                    <button type="submit" class="btn btn-primary gen-btn">Generate</button>
+                </div>
+            </form>
+            <div class="generated-key" id="generatedKey" style="display:none;">
+                <span id="genKeyText"></span>
+                <button class="btn btn-sm btn-copy" id="copyKeyBtn">Copy</button>
+            </div>
+        </section>
+
+        <section class="card">
+            <div class="card-header">
+                <h2>Key List</h2>
+                <button class="btn btn-sm btn-secondary" id="refreshBtn">Refresh</button>
+            </div>
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Key</th>
+                            <th>Username</th>
+                            <th>HWID</th>
+                            <th>Expires</th>
+                            <th>Resets</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="keyTableBody">
+                        <tr><td colspan="6" class="empty">Loading...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
