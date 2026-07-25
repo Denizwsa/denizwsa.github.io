@@ -70,6 +70,28 @@
         </section>
 
         <section class="card">
+            <h2>Bind HWID & Username</h2>
+            <form id="bindForm" class="gen-form">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Key</label>
+                        <input type="text" id="bindKey" placeholder="Paste key here">
+                    </div>
+                    <div class="form-group">
+                        <label>Username</label>
+                        <input type="text" id="bindUsername" placeholder="Username">
+                    </div>
+                    <div class="form-group">
+                        <label>HWID</label>
+                        <input type="text" id="bindHwid" placeholder="Paste HWID here">
+                    </div>
+                    <button type="submit" class="btn btn-primary gen-btn">Bind</button>
+                </div>
+            </form>
+            <p class="bind-msg" id="bindMsg"></p>
+        </section>
+
+        <section class="card">
             <div class="card-header">
                 <h2>Key List</h2>
                 <button class="btn btn-sm btn-secondary" id="refreshBtn">Refresh</button>

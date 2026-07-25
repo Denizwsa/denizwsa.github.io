@@ -270,6 +270,15 @@ body {
 
 .gen-btn { height: 40px; }
 
+.bind-msg {
+    margin-top: 10px;
+    font-size: 0.82rem;
+    min-height: 20px;
+}
+
+.bind-msg.success { color: var(--green); }
+.bind-msg.error { color: var(--red); }
+
 /* GENERATED KEY */
 .generated-key {
     margin-top: 14px;

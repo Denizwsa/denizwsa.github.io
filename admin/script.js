@@ -49,6 +49,11 @@ const genResets = document.getElementById("genResets");
 const generatedKey = document.getElementById("generatedKey");
 const genKeyText = document.getElementById("genKeyText");
 const copyKeyBtn = document.getElementById("copyKeyBtn");
+const bindForm = document.getElementById("bindForm");
+const bindKey = document.getElementById("bindKey");
+const bindUsername = document.getElementById("bindUsername");
+const bindHwid = document.getElementById("bindHwid");
+const bindMsg = document.getElementById("bindMsg");
 const refreshBtn = document.getElementById("refreshBtn");
 const keyTableBody = document.getElementById("keyTableBody");
 
@@ -109,6 +114,31 @@ copyKeyBtn.addEventListener("click", function() {
         copyKeyBtn.textContent = "Copied!";
         setTimeout(function() { copyKeyBtn.textContent = "Copy"; }, 1500);
     });
+});
+
+bindForm.addEventListener("submit", async function(e) {
+    e.preventDefault();
+    bindMsg.textContent = "";
+    bindMsg.className = "bind-msg";
+    var key = bindKey.value.trim();
+    var username = bindUsername.value.trim();
+    var hwid = bindHwid.value.trim();
+    if (!key) { bindMsg.textContent = "Enter a key."; bindMsg.className = "bind-msg error"; return; }
+    try {
+        var body = { key: key };
+        if (username) body.username = username;
+        if (hwid) body.hwid = hwid;
+        await api("/admin/add", "POST", body);
+        bindMsg.textContent = "Bound successfully!";
+        bindMsg.className = "bind-msg success";
+        bindKey.value = "";
+        bindUsername.value = "";
+        bindHwid.value = "";
+        loadKeys();
+    } catch (err) {
+        bindMsg.textContent = "Failed: " + err.message;
+        bindMsg.className = "bind-msg error";
+    }
 });
 
 refreshBtn.addEventListener("click", function() {
