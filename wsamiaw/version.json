@@ -1,5 +1,4 @@
 {
-  "latest": "30101",
-  "jar": "Wsamiaw-3.1.1.jar",
-  "sha256": "c0a8659614c1871dce06dabf869ac367aaa6cfa8d41e61b53dce9444be63fdfa"
+  "version": "3.1.1",
+  "note": "Downloads are handled via GitHub Releases: https://github.com/Denizwsa/wsamiaw/releases"
 }
