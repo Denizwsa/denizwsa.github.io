@@ -85,16 +85,12 @@ a {
     font-size: 1.2rem;
 }
 
-.logo-icon {
-    font-size: 1.5rem;
+.nav-logo-img {
+    height: 36px;
+    width: auto;
 }
 
-.logo-text {
-    background: linear-gradient(135deg, var(--accent), var(--purple));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-}
+
 
 .nav-links {
     display: flex;
